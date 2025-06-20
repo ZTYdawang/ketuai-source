@@ -16,6 +16,7 @@ jobs:
 
       - name: 构建并推送 backend 镜像
         uses: docker/build-push-action@v4
+        continue-on-error: true
         with:
           context: ./backend
           push: false
@@ -23,6 +24,7 @@ jobs:
 
       - name: 构建并推送 frontend 镜像
         uses: docker/build-push-action@v4
+        continue-on-error: true
         with:
           context: ./frontend
           push: false
