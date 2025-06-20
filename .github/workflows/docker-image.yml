@@ -19,11 +19,11 @@ jobs:
         with:
           context: ./backend
           push: false
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ketuai-backend:latest
+          tags: ketuai-backend:latest
 
       - name: 构建并推送 frontend 镜像
         uses: docker/build-push-action@v4
         with:
           context: ./frontend
           push: false
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ketuai-frontend:latest 
+          tags: ketuai-frontend:latest 
