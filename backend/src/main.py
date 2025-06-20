@@ -17,7 +17,12 @@ from src.routes.admin import admin_bp
 
 app = Flask(__name__)
 # 允许指定前端跨域并支持带 cookie/凭证
-CORS(app, supports_credentials=True, origins=["http://172.21.0.1:5173", "http://localhost:5173"])
+CORS(app, supports_credentials=True, origins=[
+    "http://localhost:5173",
+    "http://172.21.0.1:5173",
+    "http://ketuzx.com",
+    "https://ketuzx.com"
+])
 
 # 配置数据库
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///ketuai.db"
@@ -27,47 +32,21 @@ app.config['SECRET_KEY'] = 'ketuai-secret-key'
 # 初始化数据库
 db.init_app(app)
 
+# 在应用启动时创建表并确保初始管理员
+with app.app_context():
+    db.create_all()
+    from src.models import user as _u  # 躲避循环导入
+    try:
+        ensure_initial_admin()
+    except Exception as e:
+        print('init admin error:', e)
+
 # 注册蓝图
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
 app.register_blueprint(user_bp, url_prefix='/api/user')
 #app.register_blueprint(ai_department_bp, url_prefix='/api/ai-department')
 #app.register_blueprint(consultation_bp, url_prefix='/api/consultation')
 app.register_blueprint(admin_bp, url_prefix='/api/admin')
-
-# 创建数据库表
-#@app.before_first_request
-def create_tables():
-    db.create_all()
-
-# 创建默认管理员账号
-def ensure_initial_admin():
-    """如果数据库中不存在管理员账号，则创建一个默认管理员账号（admin@163.com / password）。"""
-    from werkzeug.security import generate_password_hash
-    from src.models.user import User
-    from src.models.company import Company
-
-    admin_email = 'admin@163.com'
-    existing_admin = User.query.filter_by(email=admin_email).first()
-    if existing_admin:
-        return  # 已存在则跳过
-
-    # 确保存在一个默认公司
-    company = Company.query.filter_by(name='系统').first()
-    if not company:
-        company = Company(name='系统')
-        company.save()
-
-    # 创建管理员用户
-    admin_user = User(
-        name='管理员',
-        email=admin_email,
-        password_hash=generate_password_hash('password'),
-        company_id=company.id,
-        position='系统管理员',
-        role='admin'
-    )
-    admin_user.save()
-    print('已创建初始管理员账号: admin@163.com / password')
 
 # 全局错误处理
 @app.errorhandler(404)
@@ -116,7 +95,4 @@ def proxy_v1(path):
     return Response(resp.content, resp.status_code, response_headers)
 
 if __name__ == '__main__':
-    with app.app_context():
-        create_tables()
-        ensure_initial_admin()
     app.run(host='0.0.0.0', port=5000, debug=True)
