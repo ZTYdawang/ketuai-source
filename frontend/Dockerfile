@@ -4,7 +4,8 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 
-# 安装 pnpm
+# 使用国内 registry 加速并安装 pnpm
+ENV PNPM_CONFIG_REGISTRY=https://registry.npmmirror.com
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # 安装依赖并缓存
