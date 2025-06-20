@@ -8,11 +8,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 # 安装依赖
-COPY backend/requirements.txt ./
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 复制应用代码
-COPY backend/ ./
+COPY . ./
 
 EXPOSE 5000
 

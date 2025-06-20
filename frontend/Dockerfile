@@ -8,11 +8,11 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # 安装依赖并缓存
-COPY frontend/pnpm-lock.yaml frontend/package.json ./
+COPY pnpm-lock.yaml package.json ./
 RUN pnpm install --frozen-lockfile
 
 # 复制其余前端代码并构建
-COPY frontend/ ./
+COPY . ./
 RUN pnpm run build
 
 ########## 运行阶段 ##########
