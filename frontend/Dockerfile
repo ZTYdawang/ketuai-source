@@ -19,7 +19,7 @@ RUN pnpm run build
 FROM nginx:alpine AS runtime
 
 # 自定义 Nginx 配置
-COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 拷贝静态文件
 COPY --from=builder /app/dist /usr/share/nginx/html
