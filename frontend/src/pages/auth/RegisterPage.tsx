@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import LegalModal from '../../components/LegalModal';
 import { TERMS_CONTENT, PRIVACY_CONTENT } from '../../constants/legalContents';
@@ -14,6 +14,8 @@ const RegisterPage: React.FC = () => {
     agreeTerms: false
   });
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [countdown, setCountdown] = useState(6);
   const [error, setError] = useState('');
   const [modalType, setModalType] = useState<'terms' | 'privacy' | null>(null);
   const navigate = useNavigate();
@@ -61,17 +63,43 @@ const RegisterPage: React.FC = () => {
         throw new Error(data.message || '注册失败，请稍后再试');
       }
 
-      // 保存 token 和用户信息
+      // 可选：保存 token
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
 
-      navigate('/admin');
+      // 显示成功弹窗
+      setSuccess(true);
+      setCountdown(6);
     } catch (error) {
       setError(error instanceof Error ? error.message : '注册失败，请稍后再试');
     } finally {
       setLoading(false);
     }
   };
+
+  // 倒计时 effect
+  useEffect(() => {
+    if (!success) return;
+    if (countdown === 0) {
+      navigate('/auth/login');
+      return;
+    }
+    const t = setTimeout(() => setCountdown(countdown - 1), 1000);
+    return () => clearTimeout(t);
+  }, [success, countdown, navigate]);
+
+  const SuccessModal = () => (
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-8 w-80 text-center shadow-lg">
+        <h3 className="text-xl font-bold mb-4 text-green-600">注册成功！</h3>
+        <p className="text-sm text-gray-600 mb-6">{countdown} 秒后将自动跳转到登录页面。</p>
+        <button
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
+          onClick={() => navigate('/auth/login')}
+        >立即登录</button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
@@ -226,6 +254,7 @@ const RegisterPage: React.FC = () => {
         content={modalType==='terms' ? TERMS_CONTENT : PRIVACY_CONTENT}
         onClose={()=>setModalType(null)}
       />
+      {success && <SuccessModal />}
     </div>
   );
 };
