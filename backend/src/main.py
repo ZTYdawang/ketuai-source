@@ -6,6 +6,7 @@ import datetime
 from functools import wraps
 from flask_cors import CORS
 import requests
+from werkzeug.security import generate_password_hash
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))  # DON'T CHANGE THIS !!!
 from src.models import db
@@ -31,6 +32,35 @@ app.config['SECRET_KEY'] = 'ketuai-secret-key'
 
 # 初始化数据库
 db.init_app(app)
+
+# 创建默认管理员账号函数
+def ensure_initial_admin():
+    """如果数据库中不存在管理员账号，则创建一个默认管理员账号（admin@163.com / password）。"""
+    from src.models.user import User
+    from src.models.company import Company
+
+    admin_email = 'admin@163.com'
+    existing_admin = User.query.filter_by(email=admin_email).first()
+    if existing_admin:
+        return  # 已存在则跳过
+
+    # 确保存在一个默认公司
+    company = Company.query.filter_by(name='系统').first()
+    if not company:
+        company = Company(name='系统')
+        company.save()
+
+    # 创建管理员用户
+    admin_user = User(
+        name='管理员',
+        email=admin_email,
+        password_hash=generate_password_hash('password'),
+        company_id=company.id,
+        position='系统管理员',
+        role='admin'
+    )
+    admin_user.save()
+    print('已创建初始管理员账号: admin@163.com / password')
 
 # 在应用启动时创建表并确保初始管理员
 with app.app_context():
