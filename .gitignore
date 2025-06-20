@@ -1,0 +1,36 @@
+# Node modules and build output
+node_modules/
+dist/
+.pnpm-store/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing & coverage
+coverage/
+
+# Env files
+.env
+.env.*
+
+# Editor directories and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Build artifacts
+build/
+
+eg_micro/
+
+# Docker
+*.bak
+docker-compose.override.yml 

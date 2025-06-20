@@ -1,0 +1,17 @@
+/* 保证 Coze 聊天气泡和窗口在最顶层 */
+.coze-webchat-launcher,
+.coze-webchat-root,
+.coze-webchat-modal,
+.coze-webchat-modal *,
+.coze-webchat-launcher * {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+}
+
+/* 优化百度千帆嵌入窗口外观 */
+iframe[src*="baidu.com"],
+iframe[src*="bcebos.com"] {
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15) !important;
+  border: none !important;
+}

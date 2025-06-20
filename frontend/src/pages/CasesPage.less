@@ -1,0 +1,212 @@
+.cases-hero {
+  background: #f5f7fa;
+  padding: 64px 0 32px 0;
+  text-align: center;
+}
+.cases-hero-title {
+  font-size: 40px;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 18px;
+}
+.cases-hero-desc {
+  font-size: 20px;
+  color: #2468F2;
+  margin-bottom: 10px;
+}
+.cases-hero-subdesc {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 0;
+}
+.cases-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 0 0 0;
+}
+@media (max-width: 900px) {
+  .cases-list {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px 0 0 0;
+  }
+}
+.case-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(36,104,242,0.06);
+  border: 1.5px solid #f0f3fa;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.case-card:hover {
+  box-shadow: 0 8px 32px rgba(36,104,242,0.12);
+  border-color: #2468F2;
+  transform: translateY(-4px) scale(1.01);
+}
+.case-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 0 0 0 0;
+  background: #f5f7fa;
+}
+@media (max-width: 900px) {
+  .case-img {
+    height: 140px;
+  }
+}
+.case-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  margin: 18px 0 10px 0;
+}
+.case-desc {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 16px;
+}
+.case-result {
+  background: #fafdff;
+  border-left: 3px solid #2468F2;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 0;
+}
+.case-result-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2468F2;
+  margin-bottom: 6px;
+}
+.case-result-list {
+  padding-left: 18px;
+  margin: 0;
+}
+.case-result-list li {
+  font-size: 14px;
+  color: #2468F2;
+  margin-bottom: 6px;
+  list-style: disc;
+}
+.cases-detail-list {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+.case-detail-block {
+  display: flex;
+  background: none;
+  border-radius: 22px;
+  box-shadow: 0 4px 32px rgba(36,104,242,0.08);
+  overflow: hidden;
+  align-items: stretch;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.case-detail-block:hover {
+  box-shadow: 0 8px 48px rgba(36,104,242,0.16);
+  transform: translateY(-4px) scale(1.01);
+}
+.case-detail-block.reverse {
+  flex-direction: row-reverse;
+}
+.case-detail-img-wrap {
+  flex: 1.1;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background: none;
+  box-shadow: none;
+}
+.case-detail-img-wrap img {
+  width: 100%;
+  height: 100%;
+  max-width: 420px;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: none;
+}
+.case-detail-content {
+  flex: 1.6;
+  padding: 44px 38px 44px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: none;
+  box-shadow: none;
+}
+.case-detail-client {
+  font-size: 15px;
+  color: #2468F2;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.case-detail-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #23272f;
+  margin-bottom: 18px;
+}
+.case-detail-desc {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 18px;
+}
+.case-detail-solution,
+.case-detail-results,
+.case-detail-highlights {
+  font-size: 15px;
+  color: #222;
+  margin-bottom: 12px;
+}
+.case-detail-solution ul,
+.case-detail-results ul,
+.case-detail-highlights ul {
+  margin: 6px 0 0 18px;
+  padding: 0;
+}
+.case-detail-solution li,
+.case-detail-results li,
+.case-detail-highlights li {
+  margin-bottom: 4px;
+  color: #2468F2;
+  list-style: disc;
+  font-weight: 500;
+}
+.case-detail-quote {
+  margin-top: 18px;
+  font-size: 15px;
+  color: #888;
+  font-style: italic;
+  border-left: 3px solid #2468F2;
+  padding-left: 16px;
+}
+@media (max-width: 900px) {
+  .cases-detail-list {
+    padding: 24px 0 12px 0;
+    gap: 32px;
+  }
+  .case-detail-block,
+  .case-detail-block.reverse {
+    flex-direction: column;
+  }
+  .case-detail-img-wrap img {
+    height: 180px;
+    max-height: 180px;
+  }
+  .case-detail-content {
+    padding: 24px 16px 24px 16px;
+  }
+} 

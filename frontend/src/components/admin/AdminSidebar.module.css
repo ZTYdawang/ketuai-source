@@ -1,0 +1,46 @@
+.feishu-sidebar {
+  width: 200px;
+  background: #fff;
+  border-right: none;
+  min-height: 100vh;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+}
+.feishu-menu-item {
+  width: 90%;
+  margin: 0 auto 8px auto;
+  font-size: 15px;
+  font-weight: 500;
+  color: #222;
+  padding: 0 0 0 32px;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 0 24px 24px 0;
+  background: none;
+  border: none;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.feishu-menu-item:hover {
+  background: #f5f7fa;
+  color: #165dff;
+}
+.feishu-menu-item-selected {
+  background: #e8f3ff;
+  color: #165dff;
+  font-weight: 600;
+  border-right: 4px solid #165dff;
+}
+.feishu-menu-logout {
+  color: #888;
+  margin-top: 32px;
+}
+.feishu-menu-logout:hover {
+  color: #e5484d;
+  background: #fff1f0;
+} 

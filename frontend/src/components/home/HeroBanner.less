@@ -1,0 +1,80 @@
+.hero-banner-bg {
+  background: none;
+  padding: 0;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-banner-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 48px 24px 24px 24px;
+}
+.hero-banner-text {
+  flex: 1;
+  padding-right: 40px;
+}
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+.hero-title-highlight {
+  color: #2468F2;
+  margin-left: 8px;
+}
+.hero-desc {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+.hero-btn-group {
+  display: flex;
+  align-items: center;
+}
+.hero-banner-img {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.hero-banner-img img {
+  width: 320px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 32px;
+  box-shadow: 0 12px 36px rgba(36,104,242,0.13);
+  z-index: 1;
+}
+.hero-banner-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+@media (max-width: 900px) {
+  .hero-banner-content {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 8px;
+  }
+  .hero-banner-img {
+    margin-top: 32px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .hero-banner-img img {
+    width: 100%;
+    max-width: 320px;
+    height: 180px;
+  }
+} 
