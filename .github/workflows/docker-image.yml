@@ -14,22 +14,16 @@ jobs:
       - name: 设置 Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: 登录 Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: 构建并推送 backend 镜像
         uses: docker/build-push-action@v4
         with:
           context: ./backend
-          push: true
+          push: false
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ketuai-backend:latest
 
       - name: 构建并推送 frontend 镜像
         uses: docker/build-push-action@v4
         with:
           context: ./frontend
-          push: true
+          push: false
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ketuai-frontend:latest 
