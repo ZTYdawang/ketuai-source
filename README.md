@@ -16,6 +16,7 @@
 - [x] 认证流程、仪表盘、后台管理等页面主体开发完成
 
 ### 2. 页面与交互完善
+- [x] 注册成功弹窗 + 6 秒倒计时自动跳转登录
 - [ ] 首页各区块内容与样式完善，补充真实数据与跳转逻辑
 - [ ] 关于我们、案例、联系我们等页面表单与内容完善
 - [ ] 后台管理各子页面功能补充
@@ -69,3 +70,40 @@
 ---
 
 > 2024-07-18  智能体平台前后端主流程开发与 Dify 对接全部完成，后续进入体验细节、测试与文档完善阶段。
+
+## ☑️ 已完成部署里程碑
+* Docker 容器化（前端 Nginx、后端 Gunicorn）
+* docker-compose 一键启动，国内 PyPI/NPM 镜像加速
+* 阿里云 ECS 上线，域名解析 `ketuzx.com` 指向 120.26.24.39
+* 自动建表 & 初始管理员（admin@163.com / password）
+
+---
+
+## 🔜 下一阶段开发计划（2025-Q3 Sprint1）
+
+### 1. 安全 & HTTPS
+* [ ] Let's Encrypt 证书自动申请与续期，Nginx 443 server 块
+* [ ] 前后端强制 HTTPS & HSTS
+
+### 2. CI/CD 优化
+* [ ] GitHub Actions 构建并推送镜像到 ACR / Docker Hub
+* [ ] 服务器 Watchtower 自动拉取并热更新
+
+### 3. 后端功能
+* [ ] 完善 /api/admin 统计、日志、RBAC 权限
+* [ ] 邮件验证码、找回密码、头像上传
+
+### 4. 前端体验
+* [ ] 管理后台左侧导航国际化 / 折叠记忆
+* [ ] 表单组件库抽象（FormItem、ApiForm）
+* [ ] 全站 SEO：meta title/description 动态、sitemap
+
+### 5. 测试与监控
+* [ ] pytest 单元测试覆盖 60%+
+* [ ] Playwright 端到端流水线
+* [ ] Prometheus + Grafana 监控容器资源、接口耗时
+
+### 6. 文档
+* [ ] README 拆分：快速开始 / 生产部署 / 开发手册
+* [ ] OpenAPI (Swagger) 自动生成
+* [ ] 用户常见问题 FAQ
