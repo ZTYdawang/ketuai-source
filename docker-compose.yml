@@ -6,12 +6,21 @@ services:
       context: ./backend
     container_name: ketuai-backend
     restart: unless-stopped
-    ports:
-      - "5000:5000"
     volumes:
       - ./backend/instance:/app/instance
     environment:
       - PYTHONUNBUFFERED=1
+    networks:
+      - default
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ketuai-backend.rule=Host(`www.ketuzx.com`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.ketuai-backend.entrypoints=websecure"
+      - "traefik.http.routers.ketuai-backend.tls.certresolver=myresolver"
+      - "traefik.http.middlewares.api-strip.stripprefix.prefixes=/api"
+      - "traefik.http.routers.ketuai-backend.middlewares=api-strip"
+      - "traefik.http.services.ketuai-backend.loadbalancer.server.port=5000"
 
   frontend:
     build:
@@ -20,5 +29,17 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
-    ports:
-      - "80:80" 
+    networks:
+      - default
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ketuai-frontend.rule=Host(`www.ketuzx.com`)"
+      - "traefik.http.routers.ketuai-frontend.entrypoints=websecure"
+      - "traefik.http.routers.ketuai-frontend.tls.certresolver=myresolver"
+      - "traefik.http.services.ketuai-frontend.loadbalancer.server.port=80"
+
+networks:
+  default:
+  proxy:
+    external: true 

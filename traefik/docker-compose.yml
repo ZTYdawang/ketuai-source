@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: "traefik:v3.0"
+    container_name: "traefik"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.email=1309218784@qq.com" # <-- 这里替换成你的邮箱
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      # 全局 HTTP 到 HTTPS 的重定向
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      # 启用 Dashboard，方便调试，但建议只在内网访问
+      - "--api.dashboard=true"
+    ports:
+      - "80:80"
+      - "443:443"
+      # Traefik Dashboard 端口
+      - "8080:8080"
+    volumes:
+      # 挂载 Docker socket 以便 Traefik 可以监听容器事件
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      # 挂载一个目录来持久化存储 SSL 证书
+      - "./acme.json:/letsencrypt/acme.json"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    name: proxy 
