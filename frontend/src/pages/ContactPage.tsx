@@ -234,18 +234,18 @@ const ContactPage: React.FC = () => {
           <div className="bg-white shadow-xl rounded-xl p-0 overflow-hidden">
             <div className="h-2 bg-gradient-to-r from-blue-600 to-indigo-500 w-full"></div>
             <div className="overflow-hidden h-96 flex items-center justify-center">
-            <iframe
-              title="公司位置地图"
+              {/* <iframe
+                title="公司位置地图"
                 src="https://www.amap.com/maps?zoom=16&center=118.059159,24.612632&markers=118.059159,24.612632"
-              width="100%"
-              height="100%"
-              style={{ border: 0, minHeight: '350px', minWidth: '100%' }}
-              allowFullScreen
-              loading="lazy"
-            ></iframe>
-          </div>
-          <div className="text-center mt-4 text-gray-700 text-base">
-            公司地址：{COMPANY_ADDRESS}
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '350px', minWidth: '100%' }}
+                allowFullScreen
+                loading="lazy"
+              ></iframe> */}
+            </div>
+            <div className="text-center mt-4 text-gray-700 text-base">
+              公司地址：{COMPANY_ADDRESS}
             </div>
           </div>
         </div>
